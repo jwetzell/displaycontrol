@@ -1,0 +1,32 @@
+{
+    "sony_config":{
+        "addresses":["10.0.0.106", "10.0.0.107"],
+        "commands":{
+            "on":{
+                "service":"system",
+                "method":"setPowerStatus",
+                "params":{
+                    "status": true
+                }
+            },
+            "off":{
+                "service":"system",
+                "method":"setPowerStatus",
+                "params":{
+                    "status": false
+                }
+            }
+        }
+    },
+    "rs232_config":{
+        "baudrate":"9600",
+        "databits":"8",
+        "stopbits":"1",
+        "parity":"none",
+        "flowcontrol":false,
+        "commands":{
+            "on":"POWR1   \r\n",
+            "off":"POWR0   \r\n"
+        }
+    }
+}
