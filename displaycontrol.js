@@ -6,17 +6,8 @@ var config = require('./config.json');
 var sonyConfig = config.sony_config;
 var rs232Config = config.rs232_config;
 var sonyAddresses = config.sony_config.addresses;
-
-// const sp = new SerialPort(portname, {
-//     baudRate: rs232Config.baudrate,
-//     dataBits: rs232Config.databits,
-//     parity: rs232Config.parity,
-//     stopBits: rs232Config.stopbits,
-//     flowControl: rs232Config.flowcontrol,
-//     parser: new serialport.parsers.Readline("\n")
-//   });
-
 var availableCommands = Object.keys(sonyConfig.commands).filter(value=> Object.keys(rs232Config.commands).includes(value));
+
 SerialPort.list().then((ports)=>{
     var avaliableSerialPaths = ports.map((value)=>value.path);
 
@@ -80,4 +71,6 @@ SerialPort.list().then((ports)=>{
         })
         
     })
+}).catch((err)=>{
+    console.log("Error getting available serial devices.");
 })
