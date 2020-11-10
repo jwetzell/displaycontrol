@@ -38,7 +38,7 @@ SerialPort.list().then((ports)=>{
         var command = answers.cmd
         
         if(sonyConfig.commands[command] != undefined){
-            var cmd = sonyConfig.commands[command];
+            var sonyCmd = sonyConfig.commands[command];
     
             sonyAddresses.forEach(ip => {
                 var xhr = new XMLHttpRequest();
@@ -46,7 +46,7 @@ SerialPort.list().then((ports)=>{
                     var resp = xhr.responseText;
                     console.log(resp);
                 };
-                xhr.open('POST', 'http://' + ip + '/sony/' + cmd.service);
+                xhr.open('POST', 'http://' + ip + '/sony/' + sonyCmd.service);
     
                 // if (psk) {
                 //     xhr.setRequestHeader('X-Auth-PSK', psk);
@@ -55,10 +55,10 @@ SerialPort.list().then((ports)=>{
                 console.log(`Sending command <${command}> to Sony TV @ ${ip}`)
     
                 xhr.send(JSON.stringify({
-                    method: cmd.method,
+                    method: sonyCmd.method,
                     version: '1.0',
                     id: 1,
-                    params: cmd.params ? [cmd.params] : [],
+                    params: sonyCmd.params ? [sonyCmd.params] : [],
                 }));
             });
         }
